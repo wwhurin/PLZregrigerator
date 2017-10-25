@@ -83,7 +83,7 @@ public class menulist extends Menu {
 						if(fName.equals(rs2.getString("ingredient"+Integer.toString(i)))){
 							System.out.println(fName);
 							prin+=rs2.getString("menuname")+"/";
-							number[cnt]=rs2.getInt("num");
+							number[cnt]=rs2.getInt("num"); System.out.println(number[cnt]);
 							cnt++;
 							ck=false;
 						}
@@ -137,14 +137,22 @@ public class menulist extends Menu {
 			
 			jb=new JButton[data.length];
 			
-			int y =130;
-			
+			int y =130;		
 			for(int i=0; i<data.length; i++){
 				jb[i]=new JButton(data[i]);
-				jb[i].setBounds(0, y, 500, 90);
+				jb[i].setBounds(0, y, 500, 90);	
+				String sql3="select * from menu where num="+number[i]+";";		
 				jb[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						new submenu();
+						try {
+							Connection con = getConn();
+							PreparedStatement ps=con.prepareStatement(sql3);
+							ResultSet rs = rs=ps.executeQuery();
+							new submenu(rs);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				contentPane.add(jb[i]);

@@ -122,12 +122,12 @@ public class memberDBnarrow {
 			 ps.setString(3, dto.getNick());
 			 int r=0;
 			 
-			 if(Integer.parseInt(dto.getId())>=97||Integer.parseInt(dto.getId())<=101){
+			 //if(Integer.parseInt(dto.getId())>=97||Integer.parseInt(dto.getId())<=101){
 				 
-			 }
-			 else {
+			 //}
+			 //else {
 				r = ps.executeUpdate(); //실행->저장
-			 }
+			 //}
 			 
 			 if(r>0){
 				 System.out.println("가입 성공");
