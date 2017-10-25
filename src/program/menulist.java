@@ -133,30 +133,37 @@ public class menulist extends Menu {
 			}
 			*/
 			
-			String[] data = prin.split("/");
-			
-			jb=new JButton[data.length];
-			
-			int y =130;		
-			for(int i=0; i<data.length; i++){
-				jb[i]=new JButton(data[i]);
-				jb[i].setBounds(0, y, 500, 90);	
-				String sql3="select * from menu where num="+number[i]+";";		
-				jb[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							Connection con = getConn();
-							PreparedStatement ps=con.prepareStatement(sql3);
-							ResultSet rs = rs=ps.executeQuery();
-							new submenu(rs);
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+			if(cnt!=0){
+				String[] data = prin.split("/");
+				
+				jb=new JButton[data.length];
+				
+				int y =130;		
+				for(int i=0; i<data.length; i++){
+					jb[i]=new JButton(data[i]);
+					jb[i].setBounds(0, y, 500, 90);	
+					
+					String sql3="select * from menu where num="+number[i]+";";	
+					
+					jb[i].addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							try {
+								Connection con = getConn();
+								PreparedStatement ps=con.prepareStatement(sql3);
+								ResultSet rs = rs=ps.executeQuery();
+								new submenu(rs);
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						}
-					}
-				});
-				contentPane.add(jb[i]);
-				y+=100;		
+					});
+					
+					contentPane.add(jb[i]);
+					y+=100;		
+				}
+			}else{
+				System.out.println("매칭되는 음식 없음");
 			}
 			
 			

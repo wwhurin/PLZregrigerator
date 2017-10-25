@@ -15,6 +15,7 @@ public class IngredientDAO {
 	private static final String USER = "root"; // DB ID
 	private static final String PASS = "1234"; // DB 패스워드
 	Ingredient_List iList;
+	private static String numberR;
 
 	public IngredientDAO() {
 
@@ -42,7 +43,9 @@ public class IngredientDAO {
 
 	// 재료정보 얻기
 	public IngredientDTO getIngredientDTO(String num) {
-
+		
+		numberR=num;
+		
 		IngredientDTO dto = new IngredientDTO();
 
 		Connection con = null; // 연결
@@ -55,11 +58,11 @@ public class IngredientDAO {
 			String sql = "select * from food where num=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, num);
-
+			
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				dto.setNum(rs.getString("num"));
+				dto.setNum(num);
 				dto.setName(rs.getString("name"));
 				dto.setInputyear(rs.getString("inputyear"));
 				dto.setInputmonth(rs.getString("inputmonth"));
@@ -168,8 +171,8 @@ public class IngredientDAO {
 		try {
 
 			con = getConn();
-			String sql = "update food set '', name=?, inputyear=?, inputmonth=?, inputday=?, outyear=?"
-					+ ", outmonth=?,outday=?";
+			String sql = "update food set name=?, inputyear=?, inputmonth=?, inputday=?, outyear=?"
+					+ ", outmonth=?,outday=? where num=?";
 
 			ps = con.prepareStatement(sql);
 			//ps.setString(1, vMem.getNum());
@@ -180,6 +183,8 @@ public class IngredientDAO {
 			ps.setString(5, vMem.getOutyear());
 			ps.setString(6, vMem.getOutmonth());
 			ps.setString(7, vMem.getOutday());
+			ps.setString(8, numberR);
+			System.out.println(numberR);
 
 			int r = ps.executeUpdate(); // 실행 -> 수정
 			// 1~n: 성공 , 0 : 실패

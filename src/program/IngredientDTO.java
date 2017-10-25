@@ -14,7 +14,7 @@ public class IngredientDTO {
 	// 이클립스팁 : Getter/Setter 만들기
 	// 우클릭 -> source->Generate Getters And Setters-> [Select AlL] -> [OK]
 	public void setNum(String num) {
-		this.num = null;
+		this.num = num;
 	}
 
 	public String getNum() {
@@ -81,7 +81,7 @@ public class IngredientDTO {
 	// 이클립스팁 : toString() 자동생성: 우클릭 -> source -> Generate toString->[OK]
 	@Override
 	public String toString() {
-		return "MemberDTO [num" + num + "name=" + name + ", inputyear=" + inputyear + ", inputmonth=" + inputmonth
+		return "MemberDTO [num=" + num + ", name=" + name + ", inputyear=" + inputyear + ", inputmonth=" + inputmonth
 				+ ", inputday=" + inputday + ", outyear=" + outyear + ", outmonth=" + outmonth + ", outday=" + outday
 				+ "]";
 	}
