@@ -15,9 +15,11 @@ import program.menulist;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Font;
 
-public class MainMenu extends JPanel {
+public class MainMenu extends JPanel implements MouseListener {
 	JFrame jf;
 	public JPanel contentPane;
 	ImageIcon icon;
@@ -31,7 +33,7 @@ public class MainMenu extends JPanel {
 	private JLabel label;
 	private JLabel lblTip;
 	
-	public MainMenu() {
+	public MainMenu(){
 
 			jf=new JFrame("냉장고를 부탁해!");
 			contentPane=new JPanel();
@@ -53,12 +55,14 @@ public class MainMenu extends JPanel {
 			contentPane.add(refriger);
 			
 			ImageIcon bt =rszImg("btn.png", 183, 175);
+			
 			menu1 = new JButton("");
 			menu1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new Ingredient_List();
 				}
 			});
+			menu1.addMouseListener(this);
 			menu1.setIcon(bt);
 			menu1.setBounds(1038, 401, 197, 177);
 			menu1.setBorderPainted(false);//버튼 테두리 설정
@@ -121,6 +125,41 @@ public class MainMenu extends JPanel {
 		ImageIcon ic = new ImageIcon(logo);
 		
 		return ic;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		menu1 = (JButton)e.getSource();
+		ImageIcon bton =rszImg("btnon.png", 183, 175);
+		menu1.setIcon(bton);
+		System.out.println("메뉴1 마우스 on");
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		menu1 = (JButton)e.getSource();
+		ImageIcon bt =rszImg("btn.png", 183, 175);
+		menu1.setIcon(bt);
 	}
 
 }
